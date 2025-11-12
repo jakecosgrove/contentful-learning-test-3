@@ -174,7 +174,7 @@ body {
 }
 
 .govuk-button--start::after {
-    content: "â†’";
+    content: "\2192";
     margin-left: 10px;
     font-size: 28px;
 }
