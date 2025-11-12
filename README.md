@@ -5,7 +5,7 @@ A hands-on learning environment for content designers to explore headless CMS co
 ## 🎯 Two Ways to Learn
 
 ### 1. View the Live Demo (No Setup Required)
-See a working example right away: **[View Demo Site](https://jakecosgrove.github.io/contentful-learning-test-3/demo.html)**
+See a working example right away: **[View Demo Site](https://jakecosgrove.github.io/contentful-learning-test-3/pages/demo.html)**
 
 This shows you what's possible with Contentful - a real GOV.UK-styled website powered by a headless CMS.
 
