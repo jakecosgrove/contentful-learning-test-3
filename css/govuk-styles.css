@@ -273,3 +273,255 @@ code {
     font-family: monospace;
     font-size: 16px;
 }
+
+/* Enhanced Service Site Styles */
+.govuk-header__service-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    margin-left: 30px;
+}
+
+.govuk-header__service-name:hover {
+    text-decoration: underline;
+}
+
+.govuk-header__navigation {
+    margin-left: auto;
+}
+
+.govuk-header__navigation-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.govuk-header__navigation-item a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.govuk-header__navigation-item a:hover {
+    text-decoration: underline;
+}
+
+.govuk-header__navigation-item--active a {
+    border-bottom: 3px solid white;
+    padding-bottom: 3px;
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: #1d70b8;
+    color: white;
+    padding: 60px 0;
+    margin-bottom: 40px;
+}
+
+.hero-section h1 {
+    color: white;
+    font-size: 48px;
+    margin: 0 0 20px 0;
+}
+
+.hero-section p {
+    color: white;
+    font-size: 24px;
+    margin: 0 0 30px 0;
+}
+
+.hero-section .govuk-button {
+    background-color: #00703c;
+    font-size: 24px;
+}
+
+/* Landing Page Styles */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 15px;
+}
+
+.intro {
+    font-size: 24px;
+    line-height: 1.25;
+    margin: 0 0 40px 0;
+    color: #0b0c0c;
+}
+
+/* Feature Grid */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.feature-card {
+    border-left: 5px solid #1d70b8;
+    padding: 20px;
+    background: #f3f2f1;
+}
+
+.feature-card h3 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.feature-card p {
+    margin: 0;
+    font-size: 19px;
+}
+
+/* Service List */
+.service-list-item {
+    border-bottom: 1px solid #b1b4b6;
+    padding: 20px 0;
+}
+
+.service-list-item:last-child {
+    border-bottom: none;
+}
+
+.service-list-item h2 {
+    margin-top: 0;
+}
+
+/* Back Link */
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #0b0c0c;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.back-link::before {
+    content: "←";
+    margin-right: 5px;
+}
+
+/* Footer */
+.govuk-footer {
+    background-color: #f3f2f1;
+    border-top: 1px solid #b1b4b6;
+    padding: 40px 0 20px 0;
+    margin-top: 60px;
+}
+
+.govuk-footer__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.govuk-footer__link {
+    color: #1d70b8;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.govuk-footer__link:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    text-align: center;
+    margin: 60px 0 40px 0;
+    padding-top: 40px;
+    border-top: 1px solid #b1b4b6;
+}
+
+.footer p {
+    font-size: 16px;
+    color: #505a5f;
+    margin: 0;
+}
+
+/* Help Box */
+.help-box {
+    background: #ffe5cc;
+    border-left: 5px solid #f47738;
+    padding: 20px;
+    margin: 40px 0;
+}
+
+.help-box h2 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+}
+
+.help-box p {
+    margin: 0;
+    font-size: 19px;
+}
+
+/* Inset Text */
+.govuk-inset-text {
+    padding: 15px;
+    margin: 20px 0;
+    border-left: 10px solid #b1b4b6;
+    background-color: #f3f2f1;
+}
+
+/* Grid System */
+.govuk-grid-row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.govuk-grid-column-two-thirds {
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 66.6666%;
+}
+
+/* Section Break */
+.govuk-section-break {
+    margin: 0;
+    border: 0;
+}
+
+.govuk-section-break--xl {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.govuk-section-break--visible {
+    border-bottom: 1px solid #b1b4b6;
+}
+
+/* Link Styles */
+.govuk-link {
+    color: #1d70b8;
+    text-decoration: underline;
+}
+
+.govuk-link:hover {
+    color: #003078;
+}
+
+.govuk-link--no-visited-state:visited {
+    color: #1d70b8;
+}
+
+/* Body Small */
+.govuk-body-s {
+    font-size: 16px;
+    line-height: 1.25;
+    margin: 0 0 15px 0;
+}
+
+/* Footer Text */
+.footer-text {
+    margin: 0;
+    color: #505a5f;
+}
