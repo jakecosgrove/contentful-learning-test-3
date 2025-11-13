@@ -60,7 +60,7 @@ async function fetchContent() {
  */
 function renderPageList() {
     let html = '<h1 class="govuk-heading-xl">Service pages</h1>';
-    html += '<p class="govuk-body-l">Example GOV.UK service pages powered by Contentful. Click any page to view the full content.</p>';
+    html += `<p class="govuk-body-l">Example GOV.UK service pages powered by Contentful. ${servicePages.length} ${servicePages.length === 1 ? 'page' : 'pages'} published.</p>`;
     
     servicePages.forEach(page => {
         const slug = page.fields.slug || page.sys.id;
@@ -73,7 +73,7 @@ function renderPageList() {
         }
         
         html += `<h2 class="govuk-heading-m" style="margin: 0 0 10px 0;">
-            <a href="demo.html?page=${encapeHtml(slug)}" class="govuk-link govuk-link--no-visited-state">
+            <a href="demo.html?page=${escapeHtml(slug)}" class="govuk-link govuk-link--no-visited-state">
                 ${escapeHtml(page.fields.title)}
             </a>
         </h2>`;
@@ -88,7 +88,7 @@ function renderPageList() {
     html += `
         <div class="govuk-inset-text" style="margin-top: 40px;">
             <p><strong>For content designers:</strong> These pages are pulled from Contentful in real-time. 
-            When you create your own Contentful space and add service pages, they'll appear here automatically.</p>
+            When you create and publish new service pages in Contentful, they'll appear here automatically. Just refresh the page!</p>
         </div>
     `;
     
