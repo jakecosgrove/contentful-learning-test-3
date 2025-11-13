@@ -2,16 +2,19 @@
 const SPACE_ID = '580251rmw49s';
 const DELIVERY_TOKEN = 'uy1OK3vdmQXP2YHWiQySRP2MDN04fbCiPR8WLB3g-7U';
 
-let servicePage = null;
-let organisation = null;
-
+let servicePages = [];
+let organisations = [];
 const contentDiv = document.getElementById('content');
+
+// Get URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+const pageSlug = urlParams.get('page');
 
 /**
  * Fetch content from Contentful
  */
 async function fetchContent() {
-    contentDiv.innerHTML = '<div class="loading-box"><p style="margin: 0;">Loading content from Contentful...</p></div>';
+    contentDiv.innerHTML = '<div class="loading-box"><p style="margin: 0;">Loading service pages from Contentful...</p></div>';
 
     try {
         const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/entries?content_type=servicePage&include=2`;
@@ -30,15 +33,19 @@ async function fetchContent() {
         const data = await response.json();
 
         if (data.items && data.items.length > 0) {
-            servicePage = data.items[0];
-
-            // Find linked organisation
-            if (servicePage.fields.organisation && data.includes?.Entry) {
-                const orgId = servicePage.fields.organisation.sys.id;
-                organisation = data.includes.Entry.find(entry => entry.sys.id === orgId);
+            servicePages = data.items;
+            
+            // Extract organisations from includes
+            if (data.includes?.Entry) {
+                organisations = data.includes.Entry;
             }
 
-            renderContent();
+            // Check if we should show a specific page or list all
+            if (pageSlug) {
+                renderSinglePage(pageSlug);
+            } else {
+                renderPageList();
+            }
         } else {
             showError('No service pages found in the demo space.');
         }
@@ -49,26 +56,77 @@ async function fetchContent() {
 }
 
 /**
- * Render the service page content
+ * Render list of all service pages
  */
-function renderContent() {
-    let html = '';
+function renderPageList() {
+    let html = '<h1 class="govuk-heading-xl">Service pages</h1>';
+    html += `<p class="govuk-body-l">Example GOV.UK service pages powered by Contentful. ${servicePages.length} ${servicePages.length === 1 ? 'page' : 'pages'} published.</p>`;
+    
+    servicePages.forEach(page => {
+        const slug = page.fields.slug || page.sys.id;
+        const organisation = getOrganisation(page);
+        
+        html += '<div class="service-list-item">';
+        
+        if (organisation) {
+            html += `<p class="govuk-body-s" style="margin: 0 0 5px 0; color: #505a5f;">${escapeHtml(organisation.fields.name)}</p>`;
+        }
+        
+        html += `<h2 class="govuk-heading-m" style="margin: 0 0 10px 0;">
+            <a href="demo.html?page=${escapeHtml(slug)}" class="govuk-link govuk-link--no-visited-state">
+                ${escapeHtml(page.fields.title)}
+            </a>
+        </h2>`;
+        
+        if (page.fields.summary) {
+            html += `<p class="govuk-body">${escapeHtml(page.fields.summary)}</p>`;
+        }
+        
+        html += '</div>';
+    });
+    
+    html += `
+        <div class="govuk-inset-text" style="margin-top: 40px;">
+            <p><strong>For content designers:</strong> These pages are pulled from Contentful in real-time. 
+            When you create and publish new service pages in Contentful, they'll appear here automatically. Just refresh the page!</p>
+        </div>
+    `;
+    
+    contentDiv.innerHTML = html;
+}
 
+/**
+ * Render a single service page
+ */
+function renderSinglePage(slug) {
+    const page = servicePages.find(p => p.fields.slug === slug || p.sys.id === slug);
+    
+    if (!page) {
+        showError(`Service page "${slug}" not found.`);
+        return;
+    }
+    
+    const organisation = getOrganisation(page);
+    let html = '';
+    
+    // Back link
+    html += '<a href="demo.html" class="back-link">Back to all service pages</a>';
+    
     // Organisation caption
     if (organisation && organisation.fields) {
         html += `<span class="govuk-caption-xl">${escapeHtml(organisation.fields.name)}</span>`;
     }
-
+    
     // Page title
-    html += `<h1 class="govuk-heading-xl">${escapeHtml(servicePage.fields.title)}</h1>`;
-
+    html += `<h1 class="govuk-heading-xl">${escapeHtml(page.fields.title)}</h1>`;
+    
     // Summary
-    if (servicePage.fields.summary) {
-        html += `<p class="govuk-body-l">${escapeHtml(servicePage.fields.summary)}</p>`;
+    if (page.fields.summary) {
+        html += `<p class="govuk-body-l">${escapeHtml(page.fields.summary)}</p>`;
     }
-
-    // Start button - check for both field IDs
-    const startUrl = servicePage.fields.startButton || servicePage.fields.startButtonUrl;
+    
+    // Start button
+    const startUrl = page.fields.startButton || page.fields.startButtonUrl;
     if (startUrl) {
         html += `
             <a href="${escapeHtml(startUrl)}" 
@@ -78,17 +136,17 @@ function renderContent() {
                 Start now
             </a>`;
     }
-
+    
     // Body content
-    if (servicePage.fields.bodyContent) {
+    if (page.fields.bodyContent) {
         html += '<div style="margin-top: 40px;">';
-        html += renderRichText(servicePage.fields.bodyContent);
+        html += renderRichText(page.fields.bodyContent);
         html += '</div>';
     }
-
+    
     // Last updated
-    if (servicePage.fields.lastUpdated) {
-        const date = new Date(servicePage.fields.lastUpdated);
+    if (page.fields.lastUpdated) {
+        const date = new Date(page.fields.lastUpdated);
         const formatted = date.toLocaleDateString('en-GB', {
             day: 'numeric',
             month: 'long',
@@ -99,7 +157,7 @@ function renderContent() {
                 Last updated: ${formatted}
             </p>`;
     }
-
+    
     // Organisation details
     if (organisation && organisation.fields) {
         html += '<div style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #b1b4b6;">';
@@ -120,8 +178,20 @@ function renderContent() {
         
         html += '</div>';
     }
-
+    
     contentDiv.innerHTML = html;
+}
+
+/**
+ * Get organisation for a service page
+ */
+function getOrganisation(page) {
+    if (!page.fields.organisation || !organisations.length) {
+        return null;
+    }
+    
+    const orgId = page.fields.organisation.sys.id;
+    return organisations.find(org => org.sys.id === orgId);
 }
 
 /**
@@ -176,12 +246,14 @@ function escapeHtml(text) {
  * Show error message
  */
 function showError(message) {
-    contentDiv.innerHTML = `
+    let html = '<a href="demo.html" class="back-link">Back to all service pages</a>';
+    html += `
         <div class="error-box">
             <h2>Error loading demo content</h2>
             <p class="govuk-body">${escapeHtml(message)}</p>
             <p class="govuk-body">This demo requires the sample Contentful space to be set up correctly.</p>
         </div>`;
+    contentDiv.innerHTML = html;
 }
 
 // Load content when page loads
