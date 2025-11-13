@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" class="govuk-template">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contentful Learning - GOV.UK</title>
+    <link rel="stylesheet" href="css/govuk-styles.css">
+    <style>
+        .govuk-header__service-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+        }
+        .govuk-header__service-name:hover {
+            text-decoration: underline;
+        }
+        .govuk-header__navigation {
+            margin-left: auto;
+        }
+        .govuk-header__navigation-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+        .govuk-header__navigation-item a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .govuk-header__navigation-item a:hover {
+            text-decoration: underline;
+        }
+        .govuk-header__navigation-item--active a {
+            border-bottom: 3px solid white;
+            padding-bottom: 3px;
+        }
+        .hero-section {
+            background-color: #1d70b8;
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+        .hero-section h1 {
+            color: white;
+            font-size: 48px;
+            margin: 0 0 20px 0;
+        }
+        .hero-section p {
+            color: white;
+            font-size: 24px;
+            margin: 0 0 30px 0;
+        }
+        .hero-section .govuk-button {
+            background-color: #00703c;
+            font-size: 24px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .feature-card {
+            border-left: 5px solid #1d70b8;
+            padding: 20px;
+            background: #f3f2f1;
+        }
+        .feature-card h3 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        .feature-card p {
+            margin: 0;
+            font-size: 19px;
+        }
+        .govuk-footer {
+            background-color: #f3f2f1;
+            border-top: 1px solid #b1b4b6;
+            padding: 40px 0 20px 0;
+            margin-top: 60px;
+        }
+        .govuk-footer__meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .govuk-footer__link {
+            color: #1d70b8;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        .govuk-footer__link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="govuk-header" role="banner">
+        <div class="govuk-header__container">
+            <div class="govuk-header__logo">
+                <a href="/" class="govuk-header__link">
+                    <span>GOV.UK</span>
+                </a>
+            </div>
+            <a href="/" class="govuk-header__service-name">
+                Contentful Learning Service
+            </a>
+            <nav class="govuk-header__navigation" aria-label="Main navigation">
+                <ul class="govuk-header__navigation-list">
+                    <li class="govuk-header__navigation-item govuk-header__navigation-item--active">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="govuk-header__navigation-item">
+                        <a href="demo.html">Service Pages</a>
+                    </li>
+                    <li class="govuk-header__navigation-item">
+                        <a href="guide.html">Guide</a>
+                    </li>
+                    <li class="govuk-header__navigation-item">
+                        <a href="about.html">About</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero-section">
+        <div class="govuk-width-container">
+            <h1>Learn to build GOV.UK services with Contentful</h1>
+            <p>A hands-on learning environment for content designers exploring headless CMS concepts</p>
+            <a href="demo.html" class="govuk-button govuk-button--start">
+                Get started
+            </a>
+        </div>
+    </div>
+
+    <div class="govuk-width-container">
+        <main class="govuk-main-wrapper">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                    <h2 class="govuk-heading-l">What you'll learn</h2>
+                    <p class="govuk-body-l">
+                        This service helps content designers understand how headless CMS platforms like Contentful 
+                        work with GOV.UK-styled websites. You'll learn by doing - creating, editing, and publishing 
+                        real content.
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3 class="govuk-heading-m">Content modeling</h3>
+                    <p class="govuk-body">
+                        Learn how to structure content independently from presentation. Create content types, 
+                        define fields, and build relationships between different types of content.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="govuk-heading-m">Publishing workflow</h3>
+                    <p class="govuk-body">
+                        Practice the draft → preview → publish cycle. See how content designers can preview 
+                        changes before making them live.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="govuk-heading-m">API integration</h3>
+                    <p class="govuk-body">
+                        Understand how content is delivered from a CMS to a website via APIs. See how the 
+                        same content can power multiple channels.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="govuk-heading-m">GOV.UK standards</h3>
+                    <p class="govuk-body">
+                        Work with authentic GOV.UK Design System patterns. Learn how content structure 
+                        translates to user-facing service pages.
+                    </p>
+                </div>
+            </div>
+
+            <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                    <h2 class="govuk-heading-l">Two ways to learn</h2>
+                    
+                    <h3 class="govuk-heading-m">1. Explore the demo</h3>
+                    <p class="govuk-body">
+                        View working examples of service pages powered by Contentful. No setup required - 
+                        just browse and see how it works.
+                    </p>
+                    <p>
+                        <a href="demo.html" class="govuk-link govuk-link--no-visited-state">
+                            View demo service pages
+                        </a>
+                    </p>
+
+                    <h3 class="govuk-heading-m">2. Build your own</h3>
+                    <p class="govuk-body">
+                        Download the project files and create your own Contentful space. This is where 
+                        real learning happens - you'll set up content types, create entries, and see 
+                        your content appear on your own version of the site.
+                    </p>
+                    <p>
+                        <a href="https://github.com/jakecosgrove/contentful-learning-test-3" class="govuk-link govuk-link--no-visited-state">
+                            Download from GitHub
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="govuk-inset-text" style="margin-top: 40px;">
+                <strong>Getting started:</strong> If you're new to Contentful, we recommend starting with 
+                the demo to see what's possible, then following the QUICK-SETUP.md guide to build your own.
+            </div>
+        </main>
+    </div>
+
+    <footer class="govuk-footer" role="contentinfo">
+        <div class="govuk-width-container">
+            <div class="govuk-footer__meta">
+                <div>
+                    <a href="https://github.com/jakecosgrove/contentful-learning-test-3" class="govuk-footer__link">
+                        GitHub repository
+                    </a>
+                    <a href="https://github.com/jakecosgrove/contentful-learning-test-3/blob/main/README.md" class="govuk-footer__link">
+                        Documentation
+                    </a>
+                    <a href="https://www.contentful.com/developers/docs/" class="govuk-footer__link">
+                        Contentful docs
+                    </a>
+                </div>
+                <div>
+                    <p class="govuk-body" style="margin: 0; color: #505a5f;">
+                        Built for content designer learning
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
