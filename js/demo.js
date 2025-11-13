@@ -118,6 +118,7 @@ function renderSinglePage(slug) {
         return;
     }
     
+    const title = page.fields.title || page.fields.pageTitle || 'Untitled';
     const organisation = getOrganisation(page);
     let html = '';
     
@@ -130,7 +131,7 @@ function renderSinglePage(slug) {
     }
     
     // Page title
-    html += `<h1 class="govuk-heading-xl">${escapeHtml(page.fields.title)}</h1>`;
+    html += `<h1 class="govuk-heading-xl">${escapeHtml(title)}</h1>`;
     
     // Summary
     if (page.fields.summary) {
