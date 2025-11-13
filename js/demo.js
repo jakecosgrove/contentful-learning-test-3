@@ -59,13 +59,20 @@ async function fetchContent() {
  * Render list of all service pages
  */
 function renderPageList() {
+    console.log('Rendering page list. Total pages:', servicePages.length);
+    
     let html = '<h1 class="govuk-heading-xl">Service pages</h1>';
     html += `<p class="govuk-body-l">Example GOV.UK service pages powered by Contentful. ${servicePages.length} ${servicePages.length === 1 ? 'page' : 'pages'} published.</p>`;
     
-    servicePages.forEach(page => {
+    servicePages.forEach((page, index) => {
+        console.log(`Page ${index}:`, page.fields);
+        
         const slug = page.fields.slug || page.sys.id;
-        const title = page.fields.title || 'Untitled';
+        const title = page.fields.title || page.fields.pageTitle || 'Untitled';
         const organisation = getOrganisation(page);
+        
+        console.log(`- Title: "${title}"`);
+        console.log(`- Slug: "${slug}"`);
         
         html += '<div class="service-list-item">';
         
@@ -96,6 +103,7 @@ function renderPageList() {
         </div>
     `;
     
+    console.log('Generated HTML:', html.substring(0, 500) + '...');
     contentDiv.innerHTML = html;
 }
 
