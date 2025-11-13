@@ -64,20 +64,24 @@ function renderPageList() {
     
     servicePages.forEach(page => {
         const slug = page.fields.slug || page.sys.id;
+        const title = page.fields.title || 'Untitled';
         const organisation = getOrganisation(page);
         
         html += '<div class="service-list-item">';
         
-        if (organisation) {
+        // Organisation name
+        if (organisation && organisation.fields && organisation.fields.name) {
             html += `<p class="govuk-body-s" style="margin: 0 0 5px 0; color: #505a5f;">${escapeHtml(organisation.fields.name)}</p>`;
         }
         
-        html += `<h2 class="govuk-heading-m" style="margin: 0 0 10px 0;">
-            <a href="demo.html?page=${escapeHtml(slug)}" class="govuk-link govuk-link--no-visited-state">
-                ${escapeHtml(page.fields.title)}
-            </a>
-        </h2>`;
+        // Page title as link
+        html += `<h2 class="govuk-heading-m" style="margin: 0 0 10px 0;">`;
+        html += `<a href="demo.html?page=${escapeHtml(slug)}" class="govuk-link govuk-link--no-visited-state">`;
+        html += escapeHtml(title);
+        html += `</a>`;
+        html += `</h2>`;
         
+        // Summary
         if (page.fields.summary) {
             html += `<p class="govuk-body">${escapeHtml(page.fields.summary)}</p>`;
         }
